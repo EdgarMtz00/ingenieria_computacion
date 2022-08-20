@@ -1,0 +1,23 @@
+﻿Acorde a lo ejemplificado mediante las imágenes "0...PNG" a la "10...PNG"
+...en esta carpeta “Ejercicios\coj” para resolver el ejercicio de prueba,
+...entregar en un archivo comprimido (acorde al nombre citado en el excel Actividades)
+las capturas de pantalla que correspondan a las imágenes:
+
+"5...PNG" (tomada justo tras hacer clic en el ejercicio),
+
+"6...PNG" (tomada justo tras lograr el éxito en la salida del programa que se solicita en el ejercicio),
+
+"8...PNG" (tomada justo antes de subir el archivo fuente a la plataforma),
+
+"9...PNG" (tomada justo después de subir el archivo fuente a la plataforma),
+
+"10...PNG" (tomada tras dar clic en la pestaña "judgements" cuando su código fuente haya sido aceptado).
+
+
+* Las capturas de pantalla muestren la pantalla completa de la computadora
+
+* Se vea la fecha y hora en las capturas de pantalla
+
+* Incluir en el comprimido las 5 imágenes solicitadas, con los mismos números citados
+...previamente (5,6,8,9,10) y el código fuente que haya sido aceptado con éxito en la plataforma.
+
