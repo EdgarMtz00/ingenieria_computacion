@@ -14,7 +14,7 @@ Recibe el flujo de caracteres del archivo fuente
 Busca errores que no rompan la sintaxis pero que no sean coherentes con el lenguaje
 - regresa el mismo arbol sintactico que el analizador sintactico
 ### Generador de codigo intermedio
-Crea una representacion intermedia (Grafos asicliclos definidos, Codigo de 3 caminos)
+Crea una representacion intermedia (Grafos acicliclos definidos, Codigo de 3 direcciones)
 
 ## Back End
 ### Optimizador independiente de la maquina 
