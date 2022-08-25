@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="152.35231mm"
+   height="71.209122mm"
+   viewBox="0 0 152.35231 71.209122"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient933">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop931" />
+    </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter8160"
+       x="-0.37874383"
+       y="-1.1362315"
+       width="1.7574877"
+       height="3.2724631">
+      <feGaussianBlur
+         stdDeviation="18.583003"
+         id="feGaussianBlur8162" />
+    </filter>
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-28.823838,-169.3209)">
+    <g
+       id="g11826"
+       transform="translate(-2.1463829,-39.761084)">
+      <rect
+         style="mix-blend-mode:normal;fill:#f52200;fill-opacity:1;stroke:#000000;stroke-width:3.24458;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;filter:url(#filter8160)"
+         id="rect5577"
+         width="122.03894"
+         height="40.679646"
+         x="45.708893"
+         y="206.45924"
+         transform="matrix(0.71032706,0,0,0.53491365,31.334336,123.36863)" />
+      <text
+         xml:space="preserve"
+         style="font-size:6.10194px;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:#030303;stroke-width:0;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+         x="105.14301"
+         y="246.6962"
+         id="text11569"><tspan
+           id="tspan11567"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'agave Nerd Font Mono';-inkscape-font-specification:'agave Nerd Font Mono';fill:#000000;fill-opacity:1;stroke-width:0;stroke-dasharray:none"
+           x="105.14301"
+           y="246.6962">You died</tspan></text>
+    </g>
+  </g>
+</svg>
