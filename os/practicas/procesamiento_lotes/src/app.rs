@@ -24,81 +24,63 @@ fn ui<B: Backend>(f: &mut Frame<B>) {
 
     let chunks = Layout::default()
         .direction(Direction::Vertical)
-        .margin(5)
+        .margin(2)
         .constraints(
             [
-                Constraint::Percentage(25),
-                Constraint::Percentage(25),
-                Constraint::Percentage(25),
-                Constraint::Percentage(25),
+                Constraint::Percentage(10),
+                Constraint::Percentage(90),
             ]
             .as_ref(),
         )
         .split(size);
 
-    // Words made "loooong" to demonstrate line breaking.
-    let s = "Veeeeeeeeeeeeeeeery    loooooooooooooooooong   striiiiiiiiiiiiiiiiiiiiiiiiiing.   ";
-    let mut long_line = s.repeat(usize::from(size.width) / s.len() + 4);
-    long_line.push('\n');
-    
-    let text = vec![
-        Spans::from("This is a line "),
-        Spans::from(Span::styled(
-            "This is a line   ",
-            Style::default().fg(Color::Red),
-        )),
-        Spans::from(Span::styled(
-            "This is a line",
-            Style::default().bg(Color::Blue),
-        )),
-        Spans::from(Span::styled(
-            "This is a longer line",
-            Style::default().add_modifier(Modifier::CROSSED_OUT),
-        )),
-        Spans::from(Span::styled(&long_line, Style::default().bg(Color::Green))),
-        Spans::from(Span::styled(
-            "This is a line",
-            Style::default()
-                .fg(Color::Green)
-                .add_modifier(Modifier::ITALIC),
-        )),
-    ];
 
     let create_block = |title| {
         Block::default()
             .borders(Borders::ALL)
-            .style(Style::default().bg(Color::White).fg(Color::Black))
+            .style(Style::default().bg(Color::Gray).fg(Color::Black))
             .title(Span::styled(
                 title,
                 Style::default().add_modifier(Modifier::BOLD),
             ))
     };
 
-    let paragraph = Paragraph::new(text.clone())
-        .style(Style::default().bg(Color::White).fg(Color::Black))
-        .block(create_block("Left, no wrap"))
+    let paragraph = Paragraph::new(format!("Cantidad de batches a procesar: {}", 3))
+        .style(Style::default().fg(Color::Black))
+        .block(create_block("Batches"))
         .alignment(Alignment::Left);
     f.render_widget(paragraph, chunks[0]);
 
-    let paragraph = Paragraph::new(text.clone())
-        .style(Style::default().bg(Color::White).fg(Color::Black))
-        .block(create_block("Left, wrap"))
+    let bottom_chunks = Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints(
+            [
+                Constraint::Percentage(33),
+                Constraint::Percentage(33),
+                Constraint::Percentage(33),
+            ]
+            .as_ref(),
+        )
+        .split(chunks[1]);
+
+    let paragraph = Paragraph::new("Procesos pendientes")
+        .style(Style::default().fg(Color::Black))
+        .block(create_block("Procesos pendientes"))
         .alignment(Alignment::Left)
         .wrap(Wrap { trim: true });
-    f.render_widget(paragraph, chunks[1]);
+    f.render_widget(paragraph, bottom_chunks[0]);
 
-    let paragraph = Paragraph::new(text.clone())
-        .style(Style::default().bg(Color::White).fg(Color::Black))
-        .block(create_block("Center, wrap"))
-        .alignment(Alignment::Center)
+    let paragraph = Paragraph::new("Proceso en ejecucion")
+        .style(Style::default().fg(Color::Black))
+        .block(create_block("Proceso en ejecucion"))
+        .alignment(Alignment::Left)
         .wrap(Wrap { trim: true });
-    f.render_widget(paragraph, chunks[2]);
+    f.render_widget(paragraph, bottom_chunks[1]);
 
-    let paragraph = Paragraph::new(text)
-        .style(Style::default().bg(Color::White).fg(Color::Black))
-        .block(create_block("Right, wrap"))
-        .alignment(Alignment::Right)
+    let paragraph = Paragraph::new("relleno")
+        .style(Style::default().fg(Color::Black))
+        .block(create_block("Procesos finalizados"))
+        .alignment(Alignment::Left)
         .wrap(Wrap { trim: true });
-    f.render_widget(paragraph, chunks[3]);
-    
+    f.render_widget(paragraph, bottom_chunks[2]);
 }
