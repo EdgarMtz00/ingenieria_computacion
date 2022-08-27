@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <option name="projectDefaultTargetUuid" value="1657cc3d-1262-4722-8384-a04e9983487e" />
+    <targets>
+      <target name="WSL - Ubuntu" type="wsl" uuid="1657cc3d-1262-4722-8384-a04e9983487e">
+        <config>
+          <option name="distributionMsId" value="Ubuntu" />
+          <option name="projectRootOnTarget" value="/mnt/c/Users/agust/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/222.3739.54/jbr/bin&#10;/procesamiento_lotes" />
+        </config>
+        <ContributedStateBase type="RsLanguageRuntime">
+          <config>
+            <option name="cargoPath" value="/home/emartinez/.cargo/bin/cargo" />
+            <option name="cargoVersion" value="1.61.0 (a028ae4 2022-04-29)" />
+            <option name="rustcPath" value="/home/emartinez/.cargo/bin/rustc" />
+            <option name="rustcVersion" value="1.61.0 (fe5b13d68 2022-05-18)" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

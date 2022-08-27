@@ -1,5 +1,6 @@
 use std::str::FromStr;
 
+#[derive(PartialEq)]
 pub enum Operator {
     Add,
     Subtract,
@@ -22,7 +23,7 @@ impl FromStr for Operator {
 }
 
 impl Operator {
-    fn do_operation(&self, first_operand: usize, second_operand: usize) -> usize{
+    fn do_operation(&self, first_operand: isize, second_operand: isize) -> isize{
         match self {
             Operator::Add => {first_operand + second_operand}
             Operator::Subtract => {first_operand - second_operand}
@@ -33,25 +34,28 @@ impl Operator {
 }
 
 pub struct Operation {
-    first_operand: usize,
-    second_operand: usize,
+    first_operand: isize,
+    second_operand: isize,
     operator: Operator,
-    pub result: Option<usize>,
+    pub result: Option<isize>,
 }
 
 impl FromStr for Operation {
-    type Err = ();
+    type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let tokens: Vec<&str> = s.split(" ").collect();
 
         if tokens.len() != 3 {
-            return Err(());
+            return Err(String::from("Formato de operacion invalido"));
         }
 
         let operator: Operator = tokens[1].parse().unwrap();
-        let first_operand: usize = tokens[0].parse().unwrap();
-        let second_operand: usize = tokens[2].parse().unwrap();
+        let first_operand: isize = tokens[0].parse().unwrap();
+        let second_operand: isize = tokens[2].parse().unwrap();
+        if operator == Operator::Divide && second_operand == 0 {
+            return Err(String::from("No se puede dividir entre 0"));
+        }
         let result = Some(operator.do_operation(first_operand, second_operand));
 
         return Ok(Operation{
@@ -60,5 +64,16 @@ impl FromStr for Operation {
             operator,
             result
         })
+    }
+}
+
+impl Operation {
+    pub fn new_empty() -> Self {
+        Operation{
+            first_operand: 0,
+            second_operand: 0,
+            operator: Operator::Add,
+            result: None
+        }
     }
 }
