@@ -33,6 +33,18 @@ impl Operator {
     }
 }
 
+// implement display trait for Operator
+impl std::fmt::Display for Operator {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Operator::Add => write!(f, "+"),
+            Operator::Subtract => write!(f, "-"),
+            Operator::Multiply => write!(f, "*"),
+            Operator::Divide => write!(f, "/"),
+        }
+    }
+}
+
 pub struct Operation {
     first_operand: isize,
     second_operand: isize,
@@ -75,5 +87,12 @@ impl Operation {
             operator: Operator::Add,
             result: None
         }
+    }
+}
+
+// implement display trait for operation
+impl std::fmt::Display for Operation {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{} {} {}", self.first_operand, self.operator.to_string(), self.second_operand)
     }
 }

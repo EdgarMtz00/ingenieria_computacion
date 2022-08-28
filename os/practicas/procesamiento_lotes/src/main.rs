@@ -2,6 +2,7 @@ mod app;
 mod batch;
 mod process;
 mod operation;
+mod state;
 
 #[macro_use]
 extern crate text_io;
@@ -33,7 +34,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut terminal = Terminal::new(backend)?;
 
     // create app and run it
-    let res = run_app(&mut terminal);
+    let res = run_app(&mut terminal, processes);
 
     // restore terminal
     disable_raw_mode()?;
