@@ -4,15 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "d0f3604f30bce6f6",
+        "id": "bb06d32a3132166d",
         "type": "leaf",
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "compiladores.md",
-            "mode": "source",
-            "source": false
-          }
+          "type": "empty",
+          "state": {}
         }
       }
     ],
@@ -77,7 +73,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "compiladores.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +89,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "compiladores.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -116,9 +110,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "compiladores.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -128,10 +120,10 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "d0f3604f30bce6f6",
+  "active": "bb06d32a3132166d",
   "lastOpenFiles": [
-    "analizadores-texto.md",
     "compiladores.md",
+    "analizadores-texto.md",
     "2022-08-22.md"
   ]
 }

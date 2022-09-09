@@ -1,0 +1,136 @@
+{
+  "main": {
+    "id": "07fb727bf4b657a6",
+    "type": "split",
+    "children": [
+      {
+        "id": "23e537c7e1703098",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "02769783cd6ff040",
+    "type": "split",
+    "children": [
+      {
+        "id": "7948fad5a6f88419",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e4f4f8fc77f3d158",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "8d03f46ccdb29d0a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "072cdedcfcecfb89",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e322072b9f3b66ee",
+    "type": "split",
+    "children": [
+      {
+        "id": "179c6d9a3016ad3a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c4088b1701db8c6d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "9da884a53de50b42",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "96646ecf98f4f531",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "987f057d1c850953",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "23e537c7e1703098",
+  "lastOpenFiles": [
+    "Agentes Inteligentes.md",
+    "Historia/Regreso de las redes neuronales (1986 - presente).md",
+    "Historia/Sistemas basados en el conocimiento (1969-1979).md",
+    "Historia/Nacimiento de la inteligencia artificial (1956).md",
+    "Historia/La IA se convierte en una industria (1980 - presente).md",
+    "Inteligencia Artificial.md",
+    "Historia/IA se convierte en una ciencia (1987 - presente).md",
+    "Historia/Historia.md",
+    "Historia/Genesis de la inteligencia artificial (1943-1955).md",
+    "Historia/Entusiasmo inicial (1952-1969).md"
+  ]
+}

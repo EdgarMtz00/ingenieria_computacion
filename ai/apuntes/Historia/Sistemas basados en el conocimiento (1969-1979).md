@@ -1,0 +1,1 @@
+# Sistemas basados en el conocimiento (1969-1979)

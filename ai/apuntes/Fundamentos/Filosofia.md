@@ -1,0 +1,4 @@
+# Filosofia
+
+[[Aristoteles]]
+

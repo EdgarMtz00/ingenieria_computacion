@@ -1,0 +1,8 @@
+[Filosofia](Filosofia.md)
+[Matematicas](Matematicas.md)
+[Economia](Economia.md)
+[Neurociencia](Neurociencia.md)
+[Psicologia](Psicologia.md)
+[Ingenieria Computacional](Ingenieria%20computacional.md)
+[Teoria de Control y Cibernetica](Teoria%20Control%20y%20Cibernetica.md)
+[Linguistica](Linguistica.md)
