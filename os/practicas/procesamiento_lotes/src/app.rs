@@ -1,32 +1,37 @@
 use std::io;
+use std::time::Duration;
+use crossterm::event::{DisableFocusChange, DisableMouseCapture, Event, KeyCode, poll, read};
+use crossterm::execute;
 
-use crossterm::event::{KeyCode, Event, self};
 use tui::{layout::{Alignment, Constraint, Direction, Layout}, style::{Style, Modifier, Color}, widgets::{Paragraph, Borders, Block, Wrap}, text::{Span}, backend::Backend, Terminal, Frame};
-use crate::Process;
 use crate::state::State;
 
 
-pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, processes: Vec<Process>) -> io::Result<()> {
-    let mut state: State = State::new(processes);
+pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, num_processes: usize) -> io::Result<()> {
+    execute!(std::io::stdout(), DisableMouseCapture).unwrap();
+    execute!(std::io::stdout(), DisableFocusChange).unwrap();
+    let mut state: State = State::new(num_processes);
     terminal.draw(|f| ui(f, &state))?;
-
+    let mut pause = false;
     loop {
-
-        if !state.is_finished() {
+        if !state.is_finished() && !pause {
             state.execute_step();
-            //wait one second
-            std::thread::sleep(std::time::Duration::from_millis(1000));
         }
 
-        terminal.draw(|f| ui(f, &state))?;
-
-
-        if let Event::Key(key) = event::read()? {
-            if let KeyCode::Char('q') = key.code {
-                return Ok(());
+        if poll(Duration::from_secs(1))? {
+            if let Event::Key(key) = read()?{
+                match key.code {
+                    KeyCode::Char('q') => return Ok(()),
+                    KeyCode::Char('p') => pause = true,
+                    KeyCode::Char('c') => pause = false,
+                    KeyCode::Char('w') => state.end_process_without_result(),
+                    KeyCode::Char('e') => state.interrupt(),
+                    _ => {}
+                }
             }
         }
 
+    terminal.draw(|f| ui(f, &state))?;
     }
 }
 
@@ -114,7 +119,7 @@ fn ui<B: Backend>(f: &mut Frame<B>, state: &State){
         }
     };
 
-    let finished_processes = current_batch.get_finished_processes();
+    let finished_processes = state.get_finished_processes();
     let pending_processes_text = finished_processes.iter().fold(String::new(), |acc, process| {
         acc + &format!("{} \n", process.get_name_operation_result())
     });

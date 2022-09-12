@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "formato_trabajos.md",
+            "file": "direccionamiento_ip.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "formato_trabajos.md",
+                "file": "direccionamiento_ip.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "formato_trabajos.md",
+                "file": "direccionamiento_ip.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "formato_trabajos.md"
+                "file": "direccionamiento_ip.md"
               }
             }
           }
@@ -130,11 +130,11 @@
   },
   "active": "9f74b98074ff6ce2",
   "lastOpenFiles": [
+    "formato_trabajos.md",
     "hub.md",
     "notes.md",
     "presentacion.md",
     "switch.md",
-    "formato_trabajos.md",
     "2022-08-19.md"
   ]
 }
