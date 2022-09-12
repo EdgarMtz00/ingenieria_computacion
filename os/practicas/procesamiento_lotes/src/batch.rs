@@ -2,7 +2,7 @@ use crate::Process;
 
 // batch class contains 3 processes, an id's for current process, time on execution
 pub struct Batch {
-    processes: [Option<Process>; 3],
+    pub(crate) processes: [Option<Process>; 3],
     current_process: usize,
     time_on_execution: u8,
 }
@@ -51,6 +51,14 @@ impl Batch {
         }
     }
 
+    pub fn interrupt(&mut self) {
+        if self.current_process < 2 {
+            let temp = self.processes[self.current_process].clone();
+            self.processes[self.current_process] = self.processes[self.current_process + 1].clone();
+            self.processes[self.current_process + 1] = temp;
+        }
+    }
+
     // method to get current process
     pub fn get_current_process(&self) -> Option<&Process> {
         if self.current_process >= self.processes.len() {
@@ -70,7 +78,7 @@ impl Batch {
         for process in &self.processes {
             if process.is_some() {
                 let p = process.as_ref().unwrap();
-                if p.remaining_time > 0 {
+                if p.remaining_time > 0 && p != self.get_current_process().unwrap() {
                     pending_processes.push(p);
                 }
             }
@@ -78,17 +86,8 @@ impl Batch {
         pending_processes
     }
 
-    // get finished processes
-    pub fn get_finished_processes(&self) -> Vec<&Process> {
-        let mut finished_processes = Vec::new();
-        for process in &self.processes {
-            if process.is_some() {
-                let p = process.as_ref().unwrap();
-                if p.remaining_time == 0 {
-                    finished_processes.push(p);
-                }
-            }
-        }
-        finished_processes
+    pub fn end_process_without_result(&mut self) {
+        let current_process = self.processes[self.current_process].as_mut().unwrap();
+        current_process.end_without_result();
     }
 }

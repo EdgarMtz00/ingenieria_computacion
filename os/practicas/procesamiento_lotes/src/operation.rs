@@ -1,6 +1,8 @@
 use std::str::FromStr;
+use rand::distributions::Standard;
+use rand::prelude::Distribution;
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 pub enum Operator {
     Add,
     Subtract,
@@ -25,10 +27,10 @@ impl FromStr for Operator {
 impl Operator {
     fn do_operation(&self, first_operand: isize, second_operand: isize) -> isize{
         match self {
-            Operator::Add => {first_operand + second_operand}
-            Operator::Subtract => {first_operand - second_operand}
-            Operator::Multiply => {first_operand * second_operand}
-            Operator::Divide => {first_operand / second_operand}
+            Operator::Add => { first_operand + second_operand }
+            Operator::Subtract => { first_operand - second_operand }
+            Operator::Multiply => { first_operand * second_operand }
+            Operator::Divide => { first_operand / second_operand }
         }
     }
 }
@@ -45,47 +47,34 @@ impl std::fmt::Display for Operator {
     }
 }
 
+impl Distribution<Operator> for Standard {
+    fn sample<R: rand::Rng + ?Sized>(&self, rng: &mut R) -> Operator {
+        match rng.gen_range(0..4) {
+            0 => Operator::Add,
+            1 => Operator::Subtract,
+            2 => Operator::Multiply,
+            3 => Operator::Divide,
+            _ => unreachable!()
+        }
+    }
+}
+
+#[derive(Clone, PartialEq)]
 pub struct Operation {
-    first_operand: isize,
-    second_operand: isize,
+    first_operand: usize,
+    second_operand: usize,
     operator: Operator,
     pub result: Option<isize>,
 }
 
-impl FromStr for Operation {
-    type Err = String;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let tokens: Vec<&str> = s.split(" ").collect();
-
-        if tokens.len() != 3 {
-            return Err(String::from("Formato de operacion invalido"));
-        }
-
-        let operator: Operator = tokens[1].parse().unwrap();
-        let first_operand: isize = tokens[0].parse().unwrap();
-        let second_operand: isize = tokens[2].parse().unwrap();
-        if operator == Operator::Divide && second_operand == 0 {
-            return Err(String::from("No se puede dividir entre 0"));
-        }
-        let result = Some(operator.do_operation(first_operand, second_operand));
-
-        return Ok(Operation{
+impl Operation {
+    pub fn new(first_operand: usize, second_operand: usize, operator: Operator) -> Self {
+        let result = Some(operator.do_operation(first_operand as isize, second_operand as isize));
+        Operation{
             first_operand,
             second_operand,
             operator,
             result
-        })
-    }
-}
-
-impl Operation {
-    pub fn new_empty() -> Self {
-        Operation{
-            first_operand: 0,
-            second_operand: 0,
-            operator: Operator::Add,
-            result: None
         }
     }
 }
@@ -93,6 +82,6 @@ impl Operation {
 // implement display trait for operation
 impl std::fmt::Display for Operation {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{} {} {}", self.first_operand, self.operator.to_string(), self.second_operand)
+        write!(f, "{} {} {}", self.first_operand, self.operator, self.second_operand)
     }
 }
