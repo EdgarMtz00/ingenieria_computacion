@@ -7,8 +7,12 @@
         "id": "bb06d32a3132166d",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "analisis_sintactico_predictivo.md",
+            "mode": "source",
+            "source": false
+          }
         }
       }
     ],
@@ -73,6 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "analisis_sintactico_predictivo.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,6 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "analisis_sintactico_predictivo.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -110,7 +116,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "analisis_sintactico_predictivo.md"
+              }
             }
           }
         ]
@@ -122,6 +130,7 @@
   },
   "active": "bb06d32a3132166d",
   "lastOpenFiles": [
+    "tabla_simbolos.md",
     "compiladores.md",
     "analizadores-texto.md",
     "2022-08-22.md"
