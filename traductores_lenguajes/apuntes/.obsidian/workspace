@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "analisis_sintactico_predictivo.md",
+            "file": "atributos.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "analisis_sintactico_predictivo.md",
+                "file": "atributos.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "analisis_sintactico_predictivo.md",
+                "file": "atributos.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "analisis_sintactico_predictivo.md"
+                "file": "atributos.md"
               }
             }
           }
@@ -130,6 +130,8 @@
   },
   "active": "bb06d32a3132166d",
   "lastOpenFiles": [
+    "recursion_izquierda.md",
+    "analisis_sintactico_predictivo.md",
     "tabla_simbolos.md",
     "compiladores.md",
     "analizadores-texto.md",
