@@ -1,6 +1,6 @@
 from enum import Enum
-from os import system, name
-from random import random
+from random import random, randint
+import os
 from time import sleep
 
 
@@ -26,8 +26,8 @@ class Environment:
         self.grid = [Tile.Clean if random() > dirty_ratio else Tile.Dirty for _ in range(width)]
         self._map = self.grid.copy()
 
-    def __init__(self):
-        self._random_grid(10, 0.4)
+    def __init__(self, width: int):
+        self._random_grid(width, 0.4)
 
     def __repr__(self):
         return "".join(tile.value[0] for tile in self.grid)
@@ -35,7 +35,7 @@ class Environment:
     def __str__(self):
         return self.__repr__()
 
-    def bound(self, x: int) -> bool:
+    def is_bound(self, x: int) -> bool:
         """
         Check if both x and y are within the grid
         """
@@ -45,14 +45,20 @@ class Environment:
         """
         Check if the tile at (x, y) is dirty
         """
-        return self.bound(x) and self._map[x] == Tile.Dirty
+        return self.is_bound(x) and self._map[x] == Tile.Dirty
 
     def clean(self, x: int) -> None:
         """
         Clean the tile at (x, y)
         """
-        if self.bound(x):
+        if self.is_bound(x):
             self._map[x] = Tile.Clean
+
+    def is_everything_clean(self) -> bool:
+        for tile in self._map:
+            if tile == Tile.Dirty:
+                return False
+        return True
 
 
 class Cleaner:
@@ -79,7 +85,7 @@ class Cleaner:
 
         self.x += int(self.direction.value)
 
-        if not self.environment.bound(self.x):
+        if not self.environment.is_bound(self.x):
             if self.direction == Cleaner.Direction.Left:
                 self.direction = Cleaner.Direction.Right
             elif self.direction == Cleaner.Direction.Right:
@@ -91,19 +97,21 @@ class Cleaner:
 
 def clear():
     # for windows
-    if name == 'nt':
-        _ = system('cls')
+    if os.name == 'nt':
+        _ = os.system('cls')
     # for mac and linux(here, os.name is 'posix')
     else:
-        _ = system('clear')
+        _ = os.system('clear')
 
 
 if __name__ == "__main__":
-    environment = Environment()
-    cleaner = Cleaner(environment, 0)
-    while True:
-        print(environment)
-        print(f'Score = {cleaner.score}')
-        cleaner.take_decision()
-        sleep(0.5)
+    SIZE = 10
+    clear()
+    environment = Environment(SIZE)
+    cleaner = Cleaner(environment, randint(0, SIZE - 1))
+    while not cleaner.environment.is_everything_clean():
         clear()
+        print(environment)
+        cleaner.take_decision()
+        print(f'Score = {cleaner.score}')
+        sleep(0.5)
