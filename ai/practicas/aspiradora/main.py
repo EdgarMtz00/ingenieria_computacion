@@ -5,9 +5,9 @@ from time import sleep
 
 
 class Tile(Enum):
-    Clean = "⬜",
-    Dirty = "🟫",
-    Occupied = "🧹",
+    Clean = "⬜"
+    Dirty = "🟫"
+    Occupied = "🧹"
 
 
 class Environment:
@@ -30,7 +30,7 @@ class Environment:
         self._random_grid(width, 0.4)
 
     def __repr__(self):
-        return "".join(tile.value[0] for tile in self.grid)
+        return "".join(tile.value for tile in self.grid)
 
     def __str__(self):
         return self.__repr__()
@@ -83,14 +83,11 @@ class Cleaner:
     def move(self):
         self.environment.grid[self.x] = Tile.Clean
 
-        self.x += int(self.direction.value)
+        self.x += self.direction.value
 
         if not self.environment.is_bound(self.x):
-            if self.direction == Cleaner.Direction.Left:
-                self.direction = Cleaner.Direction.Right
-            elif self.direction == Cleaner.Direction.Right:
-                self.direction = Cleaner.Direction.Left
-            self.x += int(self.direction.value) * 2
+            self.direction = Cleaner.Direction.Left if self.direction == Cleaner.Direction.Right else Cleaner.Direction.Right
+            self.x += self.direction.value * 2
 
         self.environment.grid[self.x] = Tile.Occupied
 
