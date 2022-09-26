@@ -15,7 +15,7 @@ class Environment:
     Manages the grid of tiles and gives information about it
     """
 
-    def _random_grid(self, width: int, dirty_ratio: float = 0.2) -> None:
+    def _random_grid(self, width: int, dirty_ratio: float = 0.4) -> None:
         """
         Create a random environment with the given width, height, and dirty ratio
         Arguments:
@@ -27,7 +27,7 @@ class Environment:
         self._map = self.grid.copy()
 
     def __init__(self, width: int):
-        self._random_grid(width, 0.4)
+        self._random_grid(width)
 
     def __repr__(self):
         return "".join(tile.value for tile in self.grid)
@@ -55,10 +55,7 @@ class Environment:
             self._map[x] = Tile.Clean
 
     def is_everything_clean(self) -> bool:
-        for tile in self._map:
-            if tile == Tile.Dirty:
-                return False
-        return True
+        return not Tile.Dirty in self._map
 
 
 class Cleaner:

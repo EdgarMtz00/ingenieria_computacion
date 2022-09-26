@@ -1,9 +1,0 @@
-/home/emartinez/Documents/escuela/os/practicas/fcfs/target/debug/deps/unicode_segmentation-5a175321d88c3d1a.rmeta: /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/lib.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/grapheme.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/sentence.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/word.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/tables.rs
-
-/home/emartinez/Documents/escuela/os/practicas/fcfs/target/debug/deps/unicode_segmentation-5a175321d88c3d1a.d: /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/lib.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/grapheme.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/sentence.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/word.rs /home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/tables.rs
-
-/home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/lib.rs:
-/home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/grapheme.rs:
-/home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/sentence.rs:
-/home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/word.rs:
-/home/emartinez/.cargo/registry/src/github.com-1ecc6299db9ec823/unicode-segmentation-1.10.0/src/tables.rs:
