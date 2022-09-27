@@ -52,10 +52,7 @@ impl Scheduler {
 
     fn execute_executing(&mut self) -> (){
         if self.executing.is_none() {
-            if !self.waiting_queue.is_empty() {
-                self.executing = self.waiting_queue.pop_front();
-                self.executing.as_mut().unwrap().start(self.time);
-            }
+            self.start_new_one();
             return;
         }
 
@@ -69,10 +66,9 @@ impl Scheduler {
     fn end_executing(&mut self) {
         let executing = self.executing.take().unwrap();
         self.finished.push(executing.clone());
-        self.executing = self.waiting_queue.pop_front();
-        if self.executing.is_some() {
-            self.executing.as_mut().unwrap().start(self.time);
-        }
+
+        self.start_new_one();
+
         let mut total_processes = self.waiting_queue.len() + self.blocked.len();
         if self.executing.is_some() {
             total_processes += 1;
@@ -81,6 +77,17 @@ impl Scheduler {
             let mut new_process = self.processes.pop_front().unwrap();
             new_process.load(self.time);
             self.waiting_queue.push_back(new_process);
+        }
+    }
+
+    fn start_new_one(&mut self) {
+        if self.executing.is_some() {
+            return;
+        }
+        self.executing = self.waiting_queue.pop_front();
+        if self.executing.is_some() {
+            let executing = self.executing.as_mut().unwrap();
+            executing.start(self.time);
         }
     }
 
@@ -119,10 +126,8 @@ impl Scheduler {
 
         let executing = self.executing.as_mut().unwrap();
         self.blocked.push(executing.clone());
-        self.executing = self.waiting_queue.pop_front();
-        if self.executing.is_some() {
-            self.executing.as_mut().unwrap().start(self.time);
-        }
+        self.executing = None;
+        self.start_new_one();
     }
 
     pub fn get_waiting_processes(&self) -> &VecDeque<Process> {
