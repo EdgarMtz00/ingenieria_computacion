@@ -1,3 +1,4 @@
+use std::fs;
 use std::fs::File;
 use std::io::Read;
 use std::io::Write;
@@ -136,12 +137,10 @@ fn consume(expected: char) {
     println!("Consumed: {}", consumed);
 
     if consumed != expected {
-        panic!("Syntax error: expected {}, found {}", expected.to_string(), consumed.to_string());
+        panic!("Syntax error: expected {}, found {}", expected, consumed);
     }
 
     let new_contents = &contents[1 + whitespaces..];
-
-    println!("New contents: {}", new_contents);
 
     write!(file, "{}", new_contents).unwrap();
 }
@@ -151,7 +150,7 @@ fn peek() -> char {
 
     let chars = contents.chars();
 
-    let peek = chars.skip_while(|c| c.is_whitespace()).next().unwrap_or_else(|| ' ' as char);
+    let peek = chars.skip_while(|c| c.is_whitespace()).next().unwrap_or(' ');
     println!("peek: {}", peek);
     peek
 }
@@ -159,20 +158,22 @@ fn peek() -> char {
 pub fn syntax_analysis() ->i32 {
     initialize_files();
     let result = expr();
-    println!("result: {}", result.to_string());
+    println!("result: {}", result);
 
     let mut dest_file = File::create(DEST_FILE).unwrap();
-    write!(dest_file, "{}", result.to_string()).unwrap();
+    write!(dest_file, "{}", result).unwrap();
+
+    fs::remove_file(TEMP_FILE);
 
     result
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{syntax_analysis};
+    use crate::syntax_analysis;
 
     #[test]
     fn it_works() {
-        assert_eq!(1, syntax_analysis());
+        assert_eq!(2, syntax_analysis());
     }
 }
