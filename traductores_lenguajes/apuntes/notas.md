@@ -6,3 +6,5 @@ maquina de estado
 automatas finitos
 
 Resumen libro del dragon 3.1 - 3.4.5
+
+definir tokens de cualquier lenguaje de programacion
