@@ -1,6 +1,7 @@
 use std::str::FromStr;
 use rand::distributions::Standard;
 use rand::prelude::Distribution;
+use text_io::read;
 
 #[derive(PartialEq, Clone)]
 pub enum Operator {
@@ -69,13 +70,17 @@ pub struct Operation {
 
 impl Operation {
     pub fn new(first_operand: usize, second_operand: usize, operator: Operator) -> Self {
-        let result = Some(operator.do_operation(first_operand as isize, second_operand as isize));
+        let result = None;
         Operation{
             first_operand,
             second_operand,
             operator,
             result
         }
+    }
+
+    pub fn set_result(&mut self){
+        self.result = Some(self.operator.do_operation(self.first_operand as isize, self.second_operand as isize));
     }
 
     pub fn get_result(&self) -> String {
@@ -93,6 +98,9 @@ impl Operation {
 // implement display trait for operation
 impl std::fmt::Display for Operation {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{} {} {}", self.first_operand, self.operator, self.second_operand)
+        match self.result {
+            None => write!(f, "{} {} {} = N/A", self.first_operand, self.operator, self.second_operand),
+            Some(result) => write!(f, "{} {} {} = {}", self.first_operand, self.operator, self.second_operand, result),
+        }
     }
 }

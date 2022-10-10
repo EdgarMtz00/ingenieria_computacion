@@ -55,7 +55,7 @@ class Environment:
             self._map[x] = Tile.Clean
 
     def is_everything_clean(self) -> bool:
-        return not Tile.Dirty in self._map
+        return Tile.Dirty not in self._map
 
 
 class Cleaner:

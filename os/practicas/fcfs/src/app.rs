@@ -3,7 +3,8 @@ use std::{time::Duration, io::Error};
 use crossterm::{execute, event::{poll, Event, DisableMouseCapture, DisableFocusChange, KeyCode, read}};
 use tui::{backend::Backend, Frame, Terminal};
 use tui::layout::{Constraint, Direction, Layout};
-use tui::widgets::{Block, Borders, Paragraph, Wrap};
+use tui::style::{Color, Modifier, Style};
+use tui::widgets::{Block, Borders, Cell, Paragraph, Row, Table, Wrap};
 use crate::process::Process;
 use crate::scheduler::Scheduler;
 
@@ -149,10 +150,9 @@ impl UI {
         for finished_process in finished_processes {
             let operation = finished_process.get_operation();
             finished_text += &*format!(
-                "Proceso {}: {} = {}\n",
+                "Proceso {}: {}\n",
                 finished_process.get_id(),
                 operation,
-                operation.get_result()
             );
         }
         let finished_paragraph = Paragraph::new(finished_text)
@@ -165,6 +165,54 @@ impl UI {
         f.render_widget(blocked_paragraph, process_chunks[2]);
         f.render_widget(finished_paragraph, process_chunks[3]);
     }
+
+    pub fn bcp_frame<B: Backend>(self, f: &mut Frame<B>, processes_info: Vec<Vec<String>>) {
+        let rects = Layout::default()
+            .constraints([Constraint::Percentage(100)].as_ref())
+            .margin(5)
+            .split(f.size());
+
+        let selected_style = Style::default().add_modifier(Modifier::REVERSED);
+        let normal_style = Style::default().bg(Color::Blue);
+        let header_cells = [
+            "ID", "Estado", "Operacion", "LLegada", "Finalizacion",
+            "Retorno", "Espera", "Servicio", "Restante", "Respuesta"
+        ]
+            .iter()
+            .map(|h| Cell::from(*h).style(Style::default().fg(Color::Red)));
+        let header = Row::new(header_cells)
+            .style(normal_style)
+            .height(1)
+            .bottom_margin(1);
+        let rows = processes_info.iter().map(|item| {
+            let height = item
+                .iter()
+                .map(|content| content.chars().filter(|c| *c == '\n').count())
+                .max()
+                .unwrap_or(0)
+                + 1;
+            let cells = item.iter().map(|c| Cell::from(c.as_str()));
+            Row::new(cells).height(height as u16).bottom_margin(1)
+        });
+        let t = Table::new(rows)
+            .header(header)
+            .block(Block::default().borders(Borders::ALL).title("Table"))
+            .highlight_style(selected_style)
+            .highlight_symbol(">> ")
+            .widths(&[
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+                Constraint::Percentage(10),
+            ]);
+        f.render_widget(t, rects[0]);
+    }
 }
 
 pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, num_processes: usize) -> Result<Vec<Process>, Error> {
@@ -172,6 +220,7 @@ pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, num_processes: usize) -> 
     execute!(std::io::stdout(), DisableFocusChange).unwrap();
     let mut scheduler = Scheduler::new(Process::random_vector(num_processes));
     let mut pause = false;
+    let mut bcp_mode = false;
     loop {
         let ui = UI::new();
 
@@ -180,7 +229,17 @@ pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, num_processes: usize) -> 
                 match key.code {
                     KeyCode::Char('q') => break,
                     KeyCode::Char('p') => pause = true,
-                    KeyCode::Char('c') => pause = false,
+                    KeyCode::Char('c') => {
+                        pause = false;
+                        bcp_mode = false;
+                    },
+                    KeyCode::Char('b') => {
+                        pause = true;
+                        bcp_mode = true;
+                    },
+                    KeyCode::Char('n') => {
+                        scheduler.add_new();
+                    },
                     KeyCode::Char('w') => scheduler.error(),
                     KeyCode::Char('e') => scheduler.block(),
                     _ => {}
@@ -192,7 +251,11 @@ pub fn run_app<B: Backend>(terminal: &mut Terminal<B>, num_processes: usize) -> 
             scheduler.execute();
         }
 
-        terminal.draw(|f| ui.build_frame(f, &scheduler))?;
+        if !bcp_mode {
+            terminal.draw(|f| ui.build_frame(f, &scheduler))?;
+        } else {
+            terminal.draw(|f| ui.bcp_frame(f, scheduler.get_bcp()))?;
+        }
     }
     return Ok(scheduler.get_finished_processes().clone());
 }

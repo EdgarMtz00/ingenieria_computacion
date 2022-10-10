@@ -41,7 +41,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         println!(
             "Proceso {}:\n\t- TME: {}\n\t- Hora de llegada: {}\n\t- Hora de inicio: {}\n\t\
             - Hora de finalizacion: {}\n\t- Tiempo de retorno: {}\n\t- Tiempo de respuesta: {}\n\t\
-            - Tiempo de espera: {}\n\t- Tiempo de servicio: {}\n\t- Resultado {} = {}\n",
+            - Tiempo de espera: {}\n\t- Tiempo de servicio: {}\n\t- Resultado {}\n",
             process.get_id(),
             stats.get_expected_time(),
             stats.get_arrival_time().unwrap(),
@@ -52,7 +52,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             stats.get_waited_time(),
             stats.get_executed_time(),
             operation,
-            operation.get_result()
         );
     }
 

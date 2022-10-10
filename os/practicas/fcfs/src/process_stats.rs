@@ -92,15 +92,15 @@ impl ProcessStats {
     }
 
     pub fn arrival_to_end_time(&self) -> Result<u32, &'static str>{
-        let arrival = self.arrival_time.expect("Process hasn't arrived yet");
-        let end = self.end_time.expect("Process hasn't ended yet");
+        let arrival = self.arrival_time.ok_or("The process hasn't arrived yet")?;
+        let end = self.end_time.ok_or("The process hasn't finished yet")?;
 
         Ok(end - arrival)
     }
 
     pub fn arrival_to_start_time(&self) -> Result<u32, &'static str>{
-        let arrival = self.arrival_time.expect("Process hasn't arrived yet");
-        let start = self.start_time.expect("Process hasn't started yet");
+        let arrival = self.arrival_time.ok_or("Process hasn't arrived yet")?;
+        let start = self.start_time.ok_or("Process hasn't started yet")?;
 
        Ok(start -  arrival)
     }

@@ -4,6 +4,7 @@ use crate::process::Process;
 const MAX_PROCESSES: usize = 3;
 
 pub struct Scheduler {
+    max_id: u8,
     processes: VecDeque<Process>,
     waiting_queue: VecDeque<Process>,
     executing: Option<Process>,
@@ -15,16 +16,24 @@ pub struct Scheduler {
 impl Scheduler {
    pub fn new(mut processes: Vec<Process>) -> Self {
        let mut waiting_queue = VecDeque::new();
-       let left_processes = processes.split_off(MAX_PROCESSES);
+       let mut left_processes: VecDeque<Process> = VecDeque::new();
+       let max_id = processes.len() as u8;
+
+       if processes.len() > MAX_PROCESSES {
+           left_processes = VecDeque::from(processes.split_off(MAX_PROCESSES));
+       }
+
        for mut process in processes {
            process.load(0);
            waiting_queue.push_back(process);
        }
-       let executing = waiting_queue.pop_front();
-       let mut executing = executing.unwrap_or_else(|| panic!("No processes to execute"));
+
+       let mut executing = waiting_queue.pop_front().unwrap_or_else(|| panic!("No processes to execute"));
        executing.start(0);
+
        Self {
-           processes: VecDeque::from(left_processes),
+           max_id,
+           processes: left_processes,
            waiting_queue,
            executing: Some(executing),
            blocked: Vec::new(),
@@ -32,6 +41,22 @@ impl Scheduler {
            time: 0,
        }
    }
+
+    pub fn add_new(&mut self) {
+        let mut new_process = Process::new_random(self.max_id);
+        self.max_id += 1;
+        let mut active_processes = self.waiting_queue.len() + self.blocked.len();
+        if self.executing.is_some() {
+            active_processes += 1;
+        }
+        if active_processes < MAX_PROCESSES {
+            new_process.load(self.time);
+            self.waiting_queue.push_back(new_process);
+
+        } else {
+            self.processes.push_back(new_process);
+        }
+    }
 
     pub fn execute(&mut self) {
         self.time += 1;
@@ -152,5 +177,26 @@ impl Scheduler {
 
     pub fn get_time(&self) -> &u32 {
         &self.time
+    }
+
+    pub fn get_bcp(&self) -> Vec<Vec<String>> {
+        let mut bcp = Vec::new();
+
+        for process in &self.finished {
+            bcp.push(process.bcp_array());
+        }
+        if self.executing.is_some() {
+            bcp.push(self.executing.as_ref().unwrap().bcp_array());
+        }
+        for process in &self.blocked {
+            bcp.push(process.bcp_array());
+        }
+        for process in &self.waiting_queue {
+            bcp.push(process.bcp_array());
+        }
+        for process in &self.processes {
+            bcp.push(process.bcp_array());
+        }
+        bcp
     }
 }
