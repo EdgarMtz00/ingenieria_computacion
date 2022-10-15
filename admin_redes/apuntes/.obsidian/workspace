@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "direccionamiento_ip.md",
+            "file": "formato_trabajos.md",
             "mode": "source",
             "source": false
           }
@@ -77,7 +77,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "direccionamiento_ip.md",
+                "file": "formato_trabajos.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,7 +94,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "direccionamiento_ip.md",
+                "file": "formato_trabajos.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "direccionamiento_ip.md"
+                "file": "formato_trabajos.md"
               }
             }
           }
@@ -130,6 +130,7 @@
   },
   "active": "9f74b98074ff6ce2",
   "lastOpenFiles": [
+    "direccionamiento_ip.md",
     "formato_trabajos.md",
     "hub.md",
     "notes.md",
