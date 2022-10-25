@@ -1,0 +1,155 @@
+{
+  "main": {
+    "id": "51c079e8ef99f528",
+    "type": "split",
+    "children": [
+      {
+        "id": "863b10b96ea5ca74",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bb06d32a3132166d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "analisis_sintactico_predictivo.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c7ad7be7454f5269",
+    "type": "split",
+    "children": [
+      {
+        "id": "abaef56e50564993",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a1f33a7b1960dc34",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "b39007bb207452cc",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "09496792fc956a01",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "bcc4b4b718ace7df",
+    "type": "split",
+    "children": [
+      {
+        "id": "64c984fe6d849d14",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "21ede1f2facd3783",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "analisis_sintactico_predictivo.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "23bf0d2f4412c8f9",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "analisis_sintactico_predictivo.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "43524259df2f63cd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "663a62bca05859e5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "analisis_sintactico_predictivo.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "bb06d32a3132166d",
+  "lastOpenFiles": [
+    "generacion_codigo_intermedio.md",
+    "gramaticas.md",
+    "analisis_sintactico_predictivo.md",
+    "analizador_lexico.md",
+    "atributos.md",
+    "presentacion.md",
+    "notas.md",
+    "compiladores.md",
+    "recursion_izquierda.md",
+    "tabla_simbolos.md"
+  ]
+}
