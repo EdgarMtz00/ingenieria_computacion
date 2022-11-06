@@ -5,13 +5,19 @@ from bs4 import BeautifulSoup
 import re
 import sqlite3
 
-streaming_url = 'https://www.rottentomatoes.com/browse/movies_at_home/critics:certified_fresh~sort:newest?page=1'
-theaters_url = 'https://www.rottentomatoes.com/browse/movies_in_theaters/critics:certified_fresh~sort:newest?page=1'
-movies_folder = r'D:\Peliculas\_RottenTomatoesCertified'
-browser_headers = {
+STREAMING_URL = 'https://www.rottentomatoes.com/browse/movies_at_home/critics:certified_fresh~sort:newest?page=5'
+THEATERS_URL = 'https://www.rottentomatoes.com/browse/movies_in_theaters/critics:certified_fresh~sort:newest?page=5'
+MOVIES_FOLDER = r'D:\Peliculas\_RottenTomatoesCertified'
+HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 }
-no_results_string = 'No results returned'
+NO_RESULTS = 'No results returned'
+
+CREATE_TABLE = 'CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, year TEXT, downloaded INTEGER DEFAULT 0)'
+FIND_QUERY = 'SELECT id FROM movies WHERE name = ? AND year = ?'
+INSERT_QUERY = 'INSERT INTO movies (name, year) VALUES (?, ?)'
+MARK_AS_DOWNLOADED = 'UPDATE movies SET downloaded = 1 WHERE id = ?'
+FIND_NOT_DOWNLOADED = 'SELECT * FROM movies WHERE downloaded = 0'
 
 
 def db_cursor(action):
@@ -20,40 +26,30 @@ def db_cursor(action):
 
 
 def init_db():
-    def create_table(cursor):
-        cursor.execute(
-            'CREATE TABLE IF NOT EXISTS movies (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, year TEXT, downloaded INTEGER DEFAULT 0)')
-
-    db_cursor(create_table)
+    db_cursor(lambda cursor: cursor.execute(CREATE_TABLE))
 
 
 def store_movie(movie_name, movie_year):
     def insert_movie(cursor):
-        if cursor.execute('SELECT * FROM movies WHERE name = ? AND year = ?', (movie_name, movie_year)).fetchone():
+        if cursor.execute(FIND_QUERY, (movie_name, movie_year)).fetchone():
             return
-        cursor.execute('INSERT INTO movies (name, year) VALUES (?, ?)', (movie_name, movie_year))
+        cursor.execute(INSERT_QUERY, (movie_name, movie_year))
 
     db_cursor(insert_movie)
 
 
 def mark_as_downloaded(movie_id):
-    def update_movie(cursor):
-        cursor.execute('UPDATE movies SET downloaded = 1 WHERE id = ?', (movie_id,))
-
-    db_cursor(update_movie)
+    db_cursor(lambda cursor: cursor.execute(MARK_AS_DOWNLOADED, (movie_id,)))
 
 
 def not_downloaded_movies():
-    def get_movies(cursor):
-        return cursor.execute('SELECT * FROM movies WHERE downloaded = 0').fetchall()
-
-    return db_cursor(get_movies)
+    return db_cursor(lambda cursor: cursor.execute(FIND_NOT_DOWNLOADED).fetchall())
 
 
 def load_rotten_tomatoes_movies():
     print('Loading movies from Rotten Tomatoes...')
-    streaming_page = requests.get(streaming_url)
-    theaters_page = requests.get(theaters_url)
+    streaming_page = requests.get(STREAMING_URL)
+    theaters_page = requests.get(THEATERS_URL)
 
     streaming_movies_info = BeautifulSoup(streaming_page.content, 'lxml') \
         .find_all('div', {'data-qa': 'discovery-media-list-item-caption'})
@@ -76,10 +72,8 @@ def download_piratebay_movies(movies):
 
         piratebay_url = f'https://apibay.org/q.php?q={movie_name}+{movie_year}'
 
-        print(f'Found {movie[1]} on {piratebay_url}')
-
         piratebay_movie_info = requests.get(piratebay_url).json()[0]
-        if piratebay_movie_info['name'] != no_results_string:
+        if piratebay_movie_info['name'] != NO_RESULTS:
             magnet_link = f'magnet:?xt=urn:btih:{piratebay_movie_info["info_hash"]}&dn={piratebay_movie_info["name"]}'
             print(f'Downloading {movie[1]} from {magnet_link}')
             os.startfile(magnet_link)
