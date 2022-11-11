@@ -85,9 +85,10 @@ impl UI {
         let process_chunks = self.process_layout.split(chunks[1]);
 
         let pending_paragraphs = Paragraph::new(
-            format!("Hay {} procesos pendientes\n Tiempo: {}",
+            format!("Hay {} procesos pendientes\n Tiempo: {}\n Quantum: {}",
                     scheduler.get_processes().len(),
-                    scheduler.get_time()
+                    scheduler.get_time(),
+                    scheduler.get_quantum(),
             )
         )
             .block(self.process_block)
@@ -98,10 +99,11 @@ impl UI {
         for waiting_process in waiting_processes {
             let stats = waiting_process.get_stats();
             waiting_text += &*format!(
-                "Proceso {}:\n\t - TME: {}\n\t - Tiempo en espera: {}\n",
+                "Proceso {}:\n\t - TME: {}\n\t - Tiempo en espera: {}\n\t - Tiempo ejecutado: {}\n",
                 waiting_process.get_id(),
                 stats.get_expected_time(),
-                stats.get_waited_time()
+                stats.get_waited_time(),
+                stats.get_executed_time()
             );
         }
         let waiting_paragraph = Paragraph::new(

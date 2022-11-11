@@ -26,7 +26,7 @@ impl Process {
             rng.gen_range(0..15) as usize,
             rng.gen_range(1..15) as usize,
             rng.gen::<Operator>()
-        ), rng.gen_range(5..10))
+        ), rng.gen_range(5..15))
     }
 
     pub fn random_vector(num_processes: usize) -> Vec<Self> {

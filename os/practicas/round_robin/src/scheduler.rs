@@ -2,6 +2,7 @@ use std::collections::VecDeque;
 use crate::process::Process;
 
 const MAX_PROCESSES: usize = 3;
+const MAX_QUANTUM: u32 = 5;
 
 pub struct Scheduler {
     max_id: u8,
@@ -11,6 +12,7 @@ pub struct Scheduler {
     blocked: Vec<Process>,
     finished: Vec<Process>,
     time: u32,
+    quantum: u32,
 }
 
 impl Scheduler {
@@ -39,6 +41,7 @@ impl Scheduler {
            blocked: Vec::new(),
            finished: Vec::new(),
            time: 0,
+           quantum: MAX_QUANTUM,
        }
    }
 
@@ -59,10 +62,18 @@ impl Scheduler {
     }
 
     pub fn execute(&mut self) {
+        if self.quantum == 0 {
+            self.quantum = MAX_QUANTUM;
+            if let Some(executing) = self.executing.take() {
+                self.waiting_queue.push_back(executing);
+                self.start_new_one();
+            }
+        }
         self.time += 1;
         self.execute_executing();
         self.execute_waiting_queue();
         self.execute_blocked();
+        self.quantum -= 1;
     }
 
     fn execute_waiting_queue(&mut self) {
@@ -109,6 +120,7 @@ impl Scheduler {
         if self.executing.is_some() {
             return;
         }
+        self.quantum = MAX_QUANTUM;
         self.executing = self.waiting_queue.pop_front();
         if self.executing.is_some() {
             let executing = self.executing.as_mut().unwrap();
@@ -198,5 +210,9 @@ impl Scheduler {
             bcp.push(process.bcp_array());
         }
         bcp
+    }
+
+    pub fn get_quantum(&self) -> u32 {
+        &self.quantum + 1
     }
 }
