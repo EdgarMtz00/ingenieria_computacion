@@ -38,12 +38,12 @@ impl Parser {
             Some(Token::Plus) => {
                 self.consume(Token::Plus);
                 let right = self.term();
-                self.expression_tail(format!("+ {} {}", left, right))
+                self.expression_tail(format!("{} {} +", left, right))
             }
             Some(Token::Minus) => {
                 self.consume(Token::Minus);
                 let right = self.term();
-                self.expression_tail(format!("- {} {}", left, right))
+                self.expression_tail(format!("{} {} -", left, right))
             }
             _ => left,
         }
@@ -63,12 +63,12 @@ impl Parser {
             Some(Token::Multiply) => {
                 self.consume(Token::Multiply);
                 let right = self.factor();
-                self.term_tail(format!("* {} {}", left, right))
+                self.term_tail(format!("{} {} *", left, right))
             }
             Some(Token::Divide) => {
                 self.consume(Token::Divide);
                 let right = self.factor();
-                self.term_tail(format!("/ {} {}", left, right))
+                self.term_tail(format!("{} {} /", left, right))
             }
             _ => left,
         }
