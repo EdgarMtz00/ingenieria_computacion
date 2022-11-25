@@ -44,6 +44,7 @@ impl LexicalAnalyzer {
             ')' => Some(Token::RightParenthesis),
             ';' => Some(Token::Semicolon),
             '=' => Some(Token::Equal),
+            ',' => Some(Token::Comma),
             ':' => {
                 let next_c = self.input.chars().nth(self.ahead_pointer).unwrap();
                 if next_c == '='{
