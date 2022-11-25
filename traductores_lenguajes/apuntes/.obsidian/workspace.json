@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "analisis_sintactico_predictivo.md",
+                "file": "compiladores.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "analisis_sintactico_predictivo.md",
+                "file": "compiladores.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "analisis_sintactico_predictivo.md",
+                "file": "compiladores.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "analisis_sintactico_predictivo.md"
+                "file": "compiladores.md"
               }
             }
           }
@@ -133,23 +133,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "ribbon": {
     "mostRecentAction": ""
   },
   "active": "bb06d32a3132166d",
   "lastOpenFiles": [
+    "atributos.md",
+    "tabla_simbolos.md",
+    "analizador_lexico.md",
+    "analisis_sintactico_predictivo.md",
+    "compiladores.md",
     "generacion_codigo_intermedio.md",
     "gramaticas.md",
-    "analisis_sintactico_predictivo.md",
-    "analizador_lexico.md",
-    "atributos.md",
     "presentacion.md",
     "notas.md",
-    "compiladores.md",
-    "recursion_izquierda.md",
-    "tabla_simbolos.md"
+    "recursion_izquierda.md"
   ]
 }

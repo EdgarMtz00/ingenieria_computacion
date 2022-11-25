@@ -29,7 +29,7 @@ export function breadth_search(puzzle: Puzzle, goal: Puzzle): TreeNode | null {
 }
 
 const puzzle: Puzzle = {
-    board: [[0, 5, 2], [1, 4, 3], [7, 8, 6]],
+    board: [[1, 2, 3], [4, 5, 6], [0, 7, 8]],
     blank_row: 0,
     blank_col: 0
 }
